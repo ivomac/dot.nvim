@@ -1,0 +1,8 @@
+
+vim.api.nvim_create_autocmd({"BufWritePost"}, {
+	pattern = "*",
+	callback = function()
+		os.execute("tag '"..vim.api.nvim_buf_get_name(0).."'")
+	end,
+})
+
