@@ -4,9 +4,10 @@ vim.opt.hidden = true
 vim.opt.path:append("**")
 vim.opt.autoread = true
 vim.opt.nrformats = { "bin", "hex", "alpha" }
-vim.opt.ttimeout = false
+vim.opt.ttimeout = true
+vim.opt.ttimeoutlen = 9999
 vim.opt.timeout = true
-vim.opt.timeoutlen = 800
+vim.opt.timeoutlen = 9999
 vim.opt.autowriteall = true
 vim.opt.virtualedit = "block"
 
