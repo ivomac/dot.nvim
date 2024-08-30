@@ -76,10 +76,10 @@ local function make_auto_open_pair_snip(pair)
 			snippetType = "snippet",
 			resolveExpandParams = function(snippet, line_to_cursor, matched_trigger, captures)
 				local linenr, colnr = unpack(util.get_cursor_0ind())
-				local char = vim.api.nvim_get_current_line():sub(colnr+1, colnr+1)
+				local char = vim.api.nvim_get_current_line():sub(colnr + 1, colnr + 1)
 				if char == Pair[2] then
 					return {
-						clear_region = { from = {linenr, colnr-1}, to = {linenr, colnr+1} },
+						clear_region = { from = { linenr, colnr - 1 }, to = { linenr, colnr + 1 } },
 					}
 				end
 			end
@@ -171,6 +171,35 @@ local env = s(
 	)
 )
 
+-- A snippet to create a title surrounded by #s like in a box
+-- The size of the box is determined by the length of the title
+
+local function gen_box(args)
+	local title = args[1][1]
+	local title_len = string.len(title)
+	local box_len = title_len + 8
+	local box = string.rep("#", box_len)
+	return sn(nil, {t(box)})
+end
+
+local titlebox = s(
+	{
+		trig = "box",
+		name = "titlebox",
+		desc = "create a titlebox",
+		snippetType = "snippet",
+	},
+	{
+		d(2, gen_box, {1}),
+		t({ "", "### " }),
+		i(1, "Title"),
+		t({ " ###", "" }),
+		d(3, gen_box, {1}),
+		t({"", ""}),
+		i(0),
+	}
+)
+
 ls.add_snippets("all",
 	{
 		make_pair_snip("()"),
@@ -179,7 +208,6 @@ ls.add_snippets("all",
 		make_pair_snip("<>"),
 		make_pair_snip("''"),
 		make_pair_snip('""'),
-
 		make_auto_open_pair_snip("()"),
 		make_auto_open_pair_snip("[]"),
 		make_auto_open_pair_snip("{}"),
@@ -189,6 +217,7 @@ ls.add_snippets("all",
 		time,
 		bang,
 		env,
+		titlebox
 	}
 )
 
