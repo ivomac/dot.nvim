@@ -176,29 +176,6 @@ ls.add_snippets("tex",
 	}
 )
 
-local function dict_snip(value)
-	return s(
-		{
-			trig = value,
-			name = "dictionary",
-			desc = "create a python dictionary",
-			hidden = true,
-			snippetType = "snippet",
-		},
-		fmt([[
-				{{
-					{}: {},{}
-				}}
-			]],
-			{
-				i(1, ""),
-				i(2, ""),
-				i(3, nil),
-			}
-		)
-	)
-end
-
 local function dict_key_snip(value)
 	return s(
 		{
@@ -218,33 +195,6 @@ local function dict_key_snip(value)
 	)
 end
 
-local auto_dict_key = s(
-	{
-		trig = "%s+.+:%s+.+,",
-		name = "auto dictionary item",
-		desc = "start a key:value in next line automatically",
-		trigEngine = "pattern",
-		hidden = true,
-		wordTrig = false,
-		snippetType = "snippet",
-		resolveExpandParams = function()
-			return {
-				clear_region = { from = {0, 0}, to = {0, 0} },
-			}
-		end
-	},
-	fmt([[{}
-{}: {},{}
-]],
-		{
-			t(nil),
-			i(1, ""),
-			i(2, ""),
-			i(3, nil),
-		}
-	)
-)
-
 local breakpoint = s(
 	{
 		trig = "bp",
@@ -260,9 +210,7 @@ local breakpoint = s(
 
 ls.add_snippets("python",
 	{
-		-- dict_snip("{"),
 		dict_key_snip("it"),
-		-- auto_dict_key,
 		breakpoint,
 	}
 )

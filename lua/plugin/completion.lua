@@ -39,7 +39,7 @@ return {
 			},
 		},
 		keys = {
-			{ "=c",    function() vim.cmd.Copilot("toggle") end, silent = true, desc = "Toggle Copilot" },
+			{ "=c", function() vim.cmd.Copilot("toggle") end, silent = true, desc = "Toggle Copilot" },
 		},
 	},
 
@@ -61,14 +61,9 @@ return {
 			require("luasnip").config.set_config({
 				history = false,
 				enable_autosnippets = true,
-			    update_events = {'InsertEnter', 'InsertLeave'},
-			    region_check_events = {'InsertEnter', 'InsertLeave'},
-				delete_check_events = {'InsertEnter', 'InsertLeave'},
-			})
-			require("luasnip.loaders.from_vscode").lazy_load({
-				paths = {
-					"./after/plugin/snippets/"
-				},
+				update_events = { 'InsertEnter', 'InsertLeave' },
+				region_check_events = { 'InsertEnter', 'InsertLeave' },
+				delete_check_events = { 'InsertEnter', 'InsertLeave' },
 			})
 		end,
 		keys = {
@@ -86,23 +81,6 @@ return {
 				mode = { "i", "s" },
 				desc = "Expand Snippet",
 			},
-			-- {
-			-- 	"<C-j>",
-			-- 	function()
-			-- 		if require("luasnip").expandable() then
-			-- 			require("luasnip").expand()
-			-- 		else
-			-- 		if require("copilot.suggestion").is_visible() then
-			-- 			require("copilot.suggestion").accept()
-			-- 		else
-			-- 			local key = vim.api.nvim_replace_termcodes("<C-j>", true, false, true)
-			-- 			vim.api.nvim_feedkeys(key, "nt", false)
-			-- 		end
-			-- 	end,
-			-- 	silent = true,
-			-- 	mode = { "i", "s" },
-			-- 	desc = "Accept Copilot",
-			-- },
 			{
 				"<Tab>",
 				function()
@@ -202,7 +180,7 @@ return {
 					{
 						{ name = "nvim_lsp" },
 						{ name = "nvim_lsp_signature_help" },
-						{ name = "luasnip", option = { show_autosnippets = false } },
+						{ name = "luasnip",                option = { show_autosnippets = false } },
 					},
 					{
 						{ name = "buffer" },
