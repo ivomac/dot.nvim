@@ -123,6 +123,26 @@ local dated_todo = s(
 	)
 )
 
+local date = s(
+	{
+		trig = "date",
+		name = "date",
+		desc = "insert current date",
+		snippetType = "snippet",
+	},
+	t(os.date('%Y-%m-%d'))
+)
+
+local time = s(
+	{
+		trig = "time",
+		name = "time",
+		desc = "insert current time",
+		snippetType = "snippet",
+	},
+	t(os.date('%H:%M:%S'))
+)
+
 local bang = s(
 	{
 		trig = "bang",
@@ -165,6 +185,8 @@ ls.add_snippets("all",
 		make_auto_open_pair_snip("{}"),
 		todo,
 		dated_todo,
+		date,
+		time,
 		bang,
 		env,
 	}
