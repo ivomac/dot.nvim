@@ -18,6 +18,8 @@ local server_capabilities = {
 		hoverProvider = false,
 	},
 	jedi_language_server = {
+		referencesProvider = false,
+		renameProvider = false,
 	},
 	pyright = {
 		codeActionProvider = false,
@@ -28,8 +30,6 @@ local server_capabilities = {
 		documentSymbolProvider = false,
 		executeCommandProvider = false,
 		hoverProvider = false,
-		referencesProvider = false,
-		renameProvider = false,
 		signatureHelpProvider = false,
 		typeDefinitionProvider = false,
 		workspaceSymbolProvider = false
