@@ -92,16 +92,6 @@ return {
 	},
 
 	{
-		"numToStr/Comment.nvim",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-		},
-		opts = {
-			ignore = "^$",
-		},
-	},
-
-	{
 		"junegunn/vim-easy-align",
 		keys = {
 			{ "ga", "<Plug>(LiveEasyAlign)", mode = { "n", "x" }, remap = true },

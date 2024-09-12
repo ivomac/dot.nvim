@@ -22,15 +22,6 @@ local conds_expand = require("luasnip.extras.conditions.expand")
 local util = require("luasnip.util.util")
 
 
-local calculate_comment_string = require('Comment.ft').calculate
-local utils = require('Comment.utils')
-
-local get_cstring = function()
-	local cstring = calculate_comment_string({ ctype = 1, range = utils.get_region() }) or vim.bo.commentstring
-	local left, right = utils.unwrap_cstr(cstring)
-	return { left, right }
-end
-
 local function resolve_pair(pair)
 	local Pair = { pair:sub(1, 1), pair:sub(2, 2) }
 	local resPair = Pair
@@ -88,6 +79,22 @@ local function make_auto_open_pair_snip(pair)
 	)
 end
 
+-- Helper function to get the comment prefix and suffix
+local function get_comment_parts(part)
+	local cs = vim.bo.commentstring
+	-- Ensure '%s' is in the commentstring
+	if not cs:find("%%s") then
+		cs = cs .. " %s"
+	end
+	-- Extract prefix and suffix around '%s'
+	if part == "prefix" then
+		local pref = cs:match("^(.*)%%s") or "# "
+		return pref .. "TODO(" .. os.getenv("USER") .. "): "
+	elseif part == "suffix" then
+		return cs:match("%%s(.*)$") or ""
+	end
+end
+
 local todo = s(
 	{
 		trig = "todo",
@@ -95,14 +102,15 @@ local todo = s(
 		desc = "TODO comment",
 		snippetType = "snippet",
 	},
-	fmt(
-		'{} TODO(ivo): {} {}',
-		{
-			f(function() return get_cstring()[1] end),
-			i(1, nil),
-			f(function() return get_cstring()[2] end)
-		}
-	)
+	{
+		f(function()
+			return get_comment_parts("prefix")
+		end),
+		i(1, "Your comment here"),
+		f(function()
+			return get_comment_parts("suffix")
+		end),
+	}
 )
 
 local dated_todo = s(
@@ -179,7 +187,7 @@ local function gen_box(args)
 	local title_len = string.len(title)
 	local box_len = title_len + 8
 	local box = string.rep("#", box_len)
-	return sn(nil, {t(box)})
+	return sn(nil, { t(box) })
 end
 
 local titlebox = s(
@@ -190,12 +198,12 @@ local titlebox = s(
 		snippetType = "snippet",
 	},
 	{
-		d(2, gen_box, {1}),
+		d(2, gen_box, { 1 }),
 		t({ "", "### " }),
 		i(1, "Title"),
 		t({ " ###", "" }),
-		d(3, gen_box, {1}),
-		t({"", ""}),
+		d(3, gen_box, { 1 }),
+		t({ "", "" }),
 		i(0),
 	}
 )
