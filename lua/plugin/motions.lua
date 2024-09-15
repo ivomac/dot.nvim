@@ -56,7 +56,7 @@ return {
 				-- a regular search with `/` or `?`
 				search = {
 					labels = "DJFHSKEIALWOCVBNGMRU",
-					enabled = false,
+					enabled = true,
 					search = {
 						mode = "fuzzy",
 						multi_window = true,
@@ -82,7 +82,7 @@ return {
 						style = "eol",
 						reuse = "all",
 						distance = true,
-						min_pattern_length = 3,
+						min_pattern_length = 6,
 						rainbow = { enabled = false },
 					},
 					highlight = {
