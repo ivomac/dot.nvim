@@ -204,6 +204,7 @@ return {
 		end,
 		keys = {
 			{ "gqd", function() vim.diagnostic.setqflist() end, desc = "Fill QFix with Diag" },
+			{ "=i", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, desc = "Toggle Inlay Hints" },
 		},
 	},
 
