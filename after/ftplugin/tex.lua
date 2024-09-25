@@ -1,5 +1,5 @@
 
-vim.opt_local.makeprg = "latexmk -pdf -interaction=nonstopmode %"
+vim.opt_local.makeprg = "latexmk -interaction=nonstopmode %"
 
 vim.opt_local.wrap = true
 vim.opt_local.spell = true
