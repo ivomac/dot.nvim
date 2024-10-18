@@ -2,16 +2,14 @@
 vim.opt_local.makeprg = "latexmk -interaction=nonstopmode %"
 
 vim.opt_local.wrap = true
-vim.opt_local.spell = true
-
--- create command to open pdf
 
 vim.api.nvim_create_user_command("View",
 	function()
 		local path = vim.fn.expand("%:p")
-		-- change extension
-		path = string.gsub(path, ".tex", ".pdf")
-		vim.cmd("silent !xdg-open " .. path .. " &")
+		local pdf = string.gsub(path, ".tex", ".pdf")
+		local server = vim.v.servername
+		local cmd = "silent !okular --editor-cmd 'nvim --server " .. server  .. " --remote-send <Esc>\\%lgg' " .. pdf .. " &"
+		vim.cmd(cmd)
 	end,
 	{ }
 )
