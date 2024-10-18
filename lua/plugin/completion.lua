@@ -127,6 +127,12 @@ return {
 		},
 	},
 
+	{
+		"iurimateus/luasnip-latex-snippets.nvim",
+		requires = { "L3MON4D3/LuaSnip" },
+		opts = { use_treesitter = true }
+	},
+
 	{ "onsails/lspkind.nvim" },
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "hrsh7th/cmp-buffer" },
